@@ -1,40 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { auth } from './firebase';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import { onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import FlightLogForm from './components/FlightLogForm';
+import LoginForm from './components/LoginForm';
+import FlightLogList from './components/FlightLogList';
+import Navbar from './components/Navbar';
+import Inventory from './components/Inventory';
+import Maintenance from './components/Maintenance';
+import Reports from './components/Reports';
+import Dashboard from './components/Dashboard';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 
 function App() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [user, setUser] = useState(null);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
     });
-  
     return () => unsubscribe();
-  }, []);  
+  }, []);
 
-  const handleRegister = async () => {
-    try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      alert('Registration successful!');
-    } catch (error) {
-      alert('Error: ' + error.message);
-    }
-  };
-
-  const handleLogin = async () => {
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      alert('Login successful!');
-    } catch (error) {
-      alert('Error: ' + error.message);
-    }
-  };
-
+  // eslint-disable-next-line no-unused-vars
   const handleLogout = async () => {
     try {
       await signOut(auth);
@@ -42,37 +30,35 @@ function App() {
     } catch (error) {
       alert('Error: ' + error.message);
     }
-  };  
+  };
 
   return (
-    <div className="App">
-      <h1>Drone Logbook App</h1>
-      {user ? (
+    <Router>
+      <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-start p-6">
+        <h1 className="text-3xl font-bold text-gray-800 mb-6">Drone Logbook App</h1>
+        {user ? (
+  <>
+    <Navbar onLogout={handleLogout} />
+    <Routes>
+      <Route path="/" element={<Dashboard />} />
+      <Route path="/flights" element={
         <div>
-          <p>Welcome, {user.email}</p>
-          <button onClick={handleLogout}>Logout</button>
+          <FlightLogForm user={user} />
+          <FlightLogList user={user} />
         </div>
-      ) : (
-        <div>
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          /><br />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          /><br />
-          <button onClick={handleRegister}>Register</button>
-          <button onClick={handleLogin}>Login</button>
-        </div>
-      )}
-    </div>
-  );
-  
+      } />
+      <Route path="/inventory" element={<Inventory />} />
+      <Route path="/maintenance" element={<Maintenance />} />
+      <Route path="/reports" element={<Reports />} />
+    </Routes>
+  </>
+) : (
+  <LoginForm />
+)}
+
+      </div>
+    </Router>
+  );  
 }
 
 export default App;
