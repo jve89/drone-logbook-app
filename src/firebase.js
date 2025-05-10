@@ -1,5 +1,5 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
+import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 // TODO: Add SDKs for Firebase products that you want to use
@@ -7,12 +7,12 @@ import { getFirestore } from 'firebase/firestore';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyD0mERV_TJh0IHV6jq140up-h9bsmD2hmU",
-  authDomain: "drone-logbook-app.firebaseapp.com",
-  projectId: "drone-logbook-app",
-  storageBucket: "drone-logbook-app.firebasestorage.app",
-  messagingSenderId: "952324640337",
-  appId: "1:952324640337:web:146b7f0f83a0ba0413f270"
+  apiKey: 'AIzaSyD0mERV_TJh0IHV6jq140up-h9bsmD2hmU',
+  authDomain: 'drone-logbook-app.firebaseapp.com',
+  projectId: 'drone-logbook-app',
+  storageBucket: 'drone-logbook-app.firebasestorage.app',
+  messagingSenderId: '952324640337',
+  appId: '1:952324640337:web:146b7f0f83a0ba0413f270',
 };
 
 // Initialize Firebase

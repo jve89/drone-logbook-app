@@ -1,0 +1,16 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.singleQuote": true,
+  "prettier.semi": true,
+  "prettier.trailingComma": "es5",
+  "prettier.plugins": ["prettier-plugin-tailwindcss"],
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  },
+  "files.exclude": {
+    "**/node_modules": true,
+    "**/build": true,
+    "**/dist": true
+  }
+}

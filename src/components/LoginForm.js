@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { auth } from '../firebase';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from 'firebase/auth';
 
 function LoginForm() {
   const [email, setEmail] = useState('');
@@ -25,35 +28,37 @@ function LoginForm() {
   };
 
   return (
-    <div className="bg-white shadow rounded p-6 w-full max-w-md">
+    <div className="w-full max-w-md rounded bg-white p-6 shadow">
       <input
-       type="email"
-       placeholder="Email"
-       value={email}
-       onChange={(e) => setEmail(e.target.value)}
-       className="border rounded w-full p-2 mb-4"
-       required
-      /><br />
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        className="mb-4 w-full rounded border p-2"
+        required
+      />
+      <br />
       <input
         type="password"
         placeholder="Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        className="border rounded w-full p-2 mb-4"
-       required
-      /><br />
+        className="mb-4 w-full rounded border p-2"
+        required
+      />
+      <br />
       <button
-  onClick={handleRegister}
-  className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 mr-2"
->
-  Register
-</button>
-<button
-  onClick={handleLogin}
-  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
->
-  Login
-</button>
+        onClick={handleRegister}
+        className="mr-2 rounded bg-green-500 px-4 py-2 text-white hover:bg-green-600"
+      >
+        Register
+      </button>
+      <button
+        onClick={handleLogin}
+        className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+      >
+        Login
+      </button>
     </div>
   );
 }

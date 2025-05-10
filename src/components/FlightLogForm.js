@@ -17,7 +17,7 @@ function FlightLogForm({ user }) {
         location,
         aircraft,
         duration,
-        notes
+        notes,
       });
       alert('Flight log saved!');
       setDate('');
@@ -31,47 +31,52 @@ function FlightLogForm({ user }) {
   };
 
   return (
-    <div className="bg-white shadow rounded p-6 w-full max-w-md mb-6">
+    <div className="mb-6 w-full max-w-md rounded bg-white p-6 shadow">
       <h2>New Flight Log</h2>
       <input
         type="date"
         value={date}
         onChange={(e) => setDate(e.target.value)}
-        className="border rounded w-full p-2 mb-4"
-      /><br />
+        className="mb-4 w-full rounded border p-2"
+      />
+      <br />
       <input
         type="text"
         placeholder="Location"
         value={location}
         onChange={(e) => setLocation(e.target.value)}
-        className="border rounded w-full p-2 mb-4"
-      /><br />
+        className="mb-4 w-full rounded border p-2"
+      />
+      <br />
       <input
         type="text"
         placeholder="Aircraft"
         value={aircraft}
         onChange={(e) => setAircraft(e.target.value)}
-        className="border rounded w-full p-2 mb-4"
-      /><br />
+        className="mb-4 w-full rounded border p-2"
+      />
+      <br />
       <input
         type="number"
         placeholder="Duration (minutes)"
         value={duration}
         onChange={(e) => setDuration(e.target.value)}
-        className="border rounded w-full p-2 mb-4"
-      /><br />
+        className="mb-4 w-full rounded border p-2"
+      />
+      <br />
       <textarea
         placeholder="Notes"
         value={notes}
         onChange={(e) => setNotes(e.target.value)}
-        className="border rounded w-full p-2 mb-4"
-      /><br />
+        className="mb-4 w-full rounded border p-2"
+      />
+      <br />
       <button
-  onClick={saveFlightLog}
-  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
->
-  Save Flight Log
-</button>
+        onClick={saveFlightLog}
+        className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+      >
+        Save Flight Log
+      </button>
     </div>
   );
 }
