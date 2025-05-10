@@ -6,7 +6,6 @@ import AddCertificate from './components/AddCertificate';
 import AddFlight from './components/AddFlight';
 import AddIncident from './components/AddIncident';
 import AddInventory from './components/AddInventory';
-import AddMaintenance from './components/AddMaintenance';
 import AddTraining from './components/AddTraining';
 import ApplyFilters from './components/ApplyFilters';
 import CustomizeDashboard from './components/CustomizeDashboard';
@@ -19,6 +18,12 @@ import Maintenance from './components/Maintenance';
 import Navbar from './components/Navbar';
 import Reports from './components/Reports';
 import { auth } from './firebase';
+import AddCertificatePage from './pages/AddCertificatePage';
+import AddFlightPage from './pages/AddFlightPage';
+import AddIncidentPage from './pages/AddIncidentPage';
+import AddInventoryPage from './pages/AddInventoryPage';
+import AddMaintenancePage from './pages/AddMaintenancePage';
+import AddTrainingPage from './pages/AddTrainingPage';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -42,10 +47,7 @@ function App() {
 
   return (
     <Router>
-      <div className="flex min-h-screen flex-col items-center justify-start bg-gray-100 p-6">
-        <h1 className="mb-6 text-3xl font-bold text-gray-800">
-          Drone Logbook App
-        </h1>
+      <div className="flex min-h-screen flex-col items-center justify-start bg-gray-100">
         {user ? (
           <>
             <Navbar onLogout={handleLogout} />
@@ -65,7 +67,6 @@ function App() {
               <Route path="/reports" element={<Reports />} />
               <Route path="/add-flight" element={<AddFlight />} />
               <Route path="/add-flight" element={<AddFlight />} />
-              <Route path="/add-maintenance" element={<AddMaintenance />} />
               <Route path="/add-inventory" element={<AddInventory />} />
               <Route path="/add-certificate" element={<AddCertificate />} />
               <Route path="/add-training" element={<AddTraining />} />
@@ -75,6 +76,12 @@ function App() {
                 element={<CustomizeDashboard />}
               />
               <Route path="/apply-filters" element={<ApplyFilters />} />
+              <Route path="/add-flight" element={<AddFlightPage />} />
+              <Route path="/add-maintenance" element={<AddMaintenancePage />} />
+              <Route path="/add-inventory" element={<AddInventoryPage />} />
+              <Route path="/add-certificate" element={<AddCertificatePage />} />
+              <Route path="/add-training" element={<AddTrainingPage />} />
+              <Route path="/add-incident" element={<AddIncidentPage />} />
             </Routes>
           </>
         ) : (

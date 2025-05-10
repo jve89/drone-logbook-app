@@ -8,5 +8,3 @@ function AddMaintenance() {
     </div>
   );
 }
-
-export default AddMaintenance;

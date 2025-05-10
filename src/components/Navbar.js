@@ -14,10 +14,12 @@ function Navbar({ onLogout }) {
         <div className="flex items-center space-x-4">
           <button
             className="text-2xl font-bold"
-            onClick={() => setSidebarOpen(true)}
+            onClick={() => setSidebarOpen(!sidebarOpen)} // now allows closing
+            aria-label="Toggle sidebar"
           >
             ☰
           </button>
+
           <span className="text-xl font-semibold">Drone Logbook</span>
         </div>
 
@@ -146,11 +148,13 @@ function Navbar({ onLogout }) {
       {/* Sidebar overlay */}
       {sidebarOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black bg-opacity-50"
+          className="fixed bottom-0 left-0 right-0 top-[56px] z-40 bg-black bg-opacity-50 transition-opacity duration-300"
           onClick={() => setSidebarOpen(false)}
         >
           <div
-            className="h-full w-64 bg-white p-6 shadow-lg"
+            className={`absolute left-0 top-0 h-full w-64 transform bg-white p-6 shadow-lg transition-transform duration-[1000ms] ease-in-out ${
+              sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+            }`}
             onClick={(e) => e.stopPropagation()}
           >
             <h2 className="mb-4 text-xl font-bold">Menu</h2>
@@ -177,7 +181,6 @@ function Navbar({ onLogout }) {
                   Flights
                 </button>
               </li>
-
               <li>
                 <button
                   className="w-full text-left hover:underline"
@@ -189,7 +192,6 @@ function Navbar({ onLogout }) {
                   Inventory
                 </button>
               </li>
-
               <li>
                 <button
                   className="w-full text-left hover:underline"
@@ -201,7 +203,6 @@ function Navbar({ onLogout }) {
                   Maintenance
                 </button>
               </li>
-
               <li>
                 <button
                   className="w-full text-left hover:underline"
