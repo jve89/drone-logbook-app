@@ -1,38 +1,61 @@
-.App {
-  text-align: center;
+/* Light mode (softer background) */
+body.light {
+  background-color: #f1f3f5; /* Slightly dimmed light gray */
+  color: #222;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Dark mode (softer dark background) */
+body.dark {
+  background-color: #121212;
+  color: #eee;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Tile styling inheriting theme */
+.tile {
+  width: 100%;
+  height: 250px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-between;
+  background-color: rgba(255, 255, 255, 0.85);
+  color: inherit;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+  overflow: hidden;
 }
 
-.App-link {
-  color: #61dafb;
+body.dark .tile {
+  background-color: rgba(30, 30, 30, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Navbar styling theme-aware */
+body.light .navbar {
+  background-color: #2563eb;
+  color: #fff;
+}
+
+body.dark .navbar {
+  background-color: #222;
+  color: #fff;
+}
+
+/* Dropdown menus theme-aware */
+body.light .dropdown-menu {
+  background-color: #fff;
+  color: #222;
+}
+
+body.dark .dropdown-menu {
+  background-color: #222;
+  color: #eee;
+}
+
+/* Overlay (neutral across themes) */
+.overlay {
+  background-color: rgba(0, 0, 0, 0.4);
 }

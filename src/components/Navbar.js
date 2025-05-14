@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ThemeContext } from '../context/ThemeContext';
 
 function Navbar({ onLogout }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -7,14 +8,15 @@ function Navbar({ onLogout }) {
   const [addMenuOpen, setAddMenuOpen] = useState(false);
   const [settingsMenuOpen, setSettingsMenuOpen] = useState(false);
 
+  const { theme, toggleTheme } = useContext(ThemeContext);
+
   return (
     <>
-      <nav className="mb-6 flex w-full items-center justify-between bg-blue-600 px-4 py-3 text-white shadow">
-        {/* Left side - Hamburger menu */}
+      <nav className="navbar mb-6 flex w-full items-center justify-between px-4 py-3 shadow">
         <div className="flex items-center space-x-4">
           <button
             className="text-2xl font-bold"
-            onClick={() => setSidebarOpen(!sidebarOpen)} // now allows closing
+            onClick={() => setSidebarOpen(!sidebarOpen)}
             aria-label="Toggle sidebar"
           >
             ☰
@@ -23,7 +25,6 @@ function Navbar({ onLogout }) {
           <span className="text-xl font-semibold">Drone Logbook</span>
         </div>
 
-        {/* Right side - Plus and Settings */}
         <div className="flex items-center space-x-4">
           <div className="relative">
             <button
@@ -35,14 +36,12 @@ function Navbar({ onLogout }) {
 
             {addMenuOpen && (
               <>
-                {/* Full-screen overlay */}
                 <div
-                  className="fixed inset-0 z-40"
+                  className="overlay fixed inset-0 z-40"
                   onClick={() => setAddMenuOpen(false)}
                 />
 
-                {/* Dropdown menu */}
-                <div className="absolute right-0 z-50 mt-2 w-48 rounded bg-white text-gray-800 shadow-lg">
+                <div className="dropdown-menu absolute right-0 z-50 mt-2 w-48 rounded shadow-lg">
                   <button
                     className="block w-full px-4 py-2 text-left hover:bg-gray-100 hover:text-blue-600"
                     onClick={() => {
@@ -112,14 +111,12 @@ function Navbar({ onLogout }) {
 
             {settingsMenuOpen && (
               <>
-                {/* Full-screen overlay */}
                 <div
-                  className="fixed inset-0 z-40"
+                  className="overlay fixed inset-0 z-40"
                   onClick={() => setSettingsMenuOpen(false)}
                 />
 
-                {/* Dropdown menu */}
-                <div className="absolute right-0 z-50 mt-2 w-48 rounded bg-white text-gray-800 shadow-lg">
+                <div className="dropdown-menu absolute right-0 z-50 mt-2 w-48 rounded shadow-lg">
                   <button
                     className="block w-full px-4 py-2 text-left hover:bg-gray-100"
                     onClick={() => {
@@ -138,6 +135,15 @@ function Navbar({ onLogout }) {
                   >
                     Apply Filters
                   </button>
+                  <button
+                    className="block w-full px-4 py-2 text-left hover:bg-gray-100"
+                    onClick={() => {
+                      toggleTheme();
+                      setSettingsMenuOpen(false);
+                    }}
+                  >
+                    Switch to {theme === 'light' ? 'Dark' : 'Light'} Mode
+                  </button>
                 </div>
               </>
             )}
@@ -145,10 +151,9 @@ function Navbar({ onLogout }) {
         </div>
       </nav>
 
-      {/* Sidebar overlay */}
       {sidebarOpen && (
         <div
-          className="fixed bottom-0 left-0 right-0 top-[56px] z-40 bg-black bg-opacity-50 transition-opacity duration-300"
+          className="overlay fixed bottom-0 left-0 right-0 top-[56px] z-40 transition-opacity duration-300"
           onClick={() => setSidebarOpen(false)}
         >
           <div
